@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://assets.pinterest.com/ext/embed.html?id=355573333054479398" height="100px">
+        <img src="https://i.pinimg.com/564x/00/57/e6/0057e6e8eef771ce6b160d981dc038bc.jpg" height="100px">
     </a>
     <h1 align="center">Yii 2 Application Students </h1>
     <br>
