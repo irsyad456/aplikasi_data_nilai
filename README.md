@@ -19,7 +19,7 @@ This Website Includes Of : CRUD students, CRUD grades, CRUD subjects, and so on.
 3. run the xampp (obviously)
 4. Create New Database Called nilai_siswa / Change the dbname on `common\config\main-local.php` at line 7
 5. open command line in project root
-6. run ```bash php init ```
+6. run `php init`
 7. choose [0]development
 8. migrate the database by running this command ```bash php yii migrate``` then choose yes
 9. to serve the app run this command ```bash php yii serve --docroot="@frontend/web"
