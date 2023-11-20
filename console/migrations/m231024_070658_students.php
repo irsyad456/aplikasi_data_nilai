@@ -12,8 +12,9 @@ class m231024_070658_students extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('students', [
+        $this->createTable('{{%students}}', [
             'id' => $this->primaryKey(),
+            'user_id' => $this->integer(),
             'nomor_induk' => $this->string(20)->unique()->notNull(),
             'nama' => $this->string(255),
             'alamat' => $this->text(),

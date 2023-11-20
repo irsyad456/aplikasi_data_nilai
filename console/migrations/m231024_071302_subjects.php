@@ -12,7 +12,7 @@ class m231024_071302_subjects extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('subjects', [
+        $this->createTable('{{%subjects}}', [
             'id' => $this->primaryKey(),
             'nama' => $this->string(255)->unique(),
             'bobot' => $this->float(),

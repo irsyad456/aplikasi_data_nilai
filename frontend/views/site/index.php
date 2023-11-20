@@ -10,6 +10,8 @@ $this->title = 'My Yii Application';
             <h1 class="display-4">Congratulations!</h1>
             <p class="fs-5 fw-light">You have successfully created your Yii-powered application.</p>
             <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
+            <p class="fs-5 fw-light">Average Exam: <?= $nilai ?></p>
+            <p class="fs-5 fw-lighter">I Love Yii2 :)</p>
         </div>
     </div>
 

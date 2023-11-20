@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use frontend\models\Students;
+use frontend\models\Grades;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -110,7 +112,8 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token verify email token
      * @return static|null
      */
-    public static function findByVerificationToken($token) {
+    public static function findByVerificationToken($token)
+    {
         return static::findOne([
             'verification_token' => $token,
             'status' => self::STATUS_INACTIVE
@@ -209,5 +212,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function getStudent()
+    {
+        return $this->hasOne(Students::class, ['user_id' => 'id']);
+    }
+
+    public function getGrades()
+    {
+        return $this->hasMany(Grades::class, ['user_id' => 'id=']);
     }
 }

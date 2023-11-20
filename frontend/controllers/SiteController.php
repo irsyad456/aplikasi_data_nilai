@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\config\functions;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -15,6 +16,10 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Grades;
+use frontend\models\GradesSearch;
+use frontend\models\Students;
+use frontend\models\Subjects;
 
 /**
  * Site controller
@@ -75,7 +80,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $nilai = Grades::find()->select('nilai')->andWhere(['jenis_nilai' => 'exam'])->sum('nilai');
+        $totalSiswa = Students::find()->count();
+        $totalNilai = $nilai / $totalSiswa;
+
+        $this->layout = 'main';
+        return $this->render('index', ['nilai' => $totalNilai]);
     }
 
     /**
@@ -255,5 +265,36 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function actionProfile()
+    {
+        // Get User Data
+        $user = Yii::$app->user->identity;
+        $student = $user->student;
+        $grades = $user->grades;
+
+        // Get User Grades
+        $searchModel = new GradesSearch();
+        $dataProvider = $searchModel->searchProfile($this->request->queryParams);
+
+        $nilais = Grades::find()->andWhere(['student_id' => $student->id])->all();
+        $bobots = Subjects::find()->select('bobot')->sum('bobot');
+
+        if ($bobots != 0) {
+            $data = [];
+            foreach ($nilais as $nilai) {
+                $data[] = $nilai->nilai;
+            }
+            $changedNilai = array_product($data);
+
+            $finalNilai = number_format($changedNilai / $bobots);
+            $averageNilai = number_format(count($data) > 0 ? array_sum($data) / count($data) : 0);
+        } else {
+            $finalNilai = 0;
+        }
+
+        //Render Profile On views/site/profile
+        return $this->render('profile', ['user' => $user, 'student' => $student, 'grades' => $grades, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'finalGrades' => $finalNilai, 'averageGrades' => $averageNilai]);
     }
 }

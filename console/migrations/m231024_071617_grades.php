@@ -12,10 +12,21 @@ class m231024_071617_grades extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('grades', [
+        $this->createTable('{{%grades}}', [
             'id' => $this->primaryKey(),
-            'student_id' => $this->integer()->notNull()
+            'student_id' => $this->integer()->notNull(),
+            'subject_id' => $this->integer()->notNull(),
+            'jenis_nilai' => $this->string(50),
+            'nilai' => $this->float(),
+            'created_at' => $this->date(),
+            'updated_at' => $this->date(),
         ]);
+        //foreign students to grades
+        $this->addForeignKey('fk_grades_students', '{{%grades}}', 'student_id', '{{%students}}', 'id');
+        //foreign grades to students
+        $this->addForeignKey('fk_grades_subjects', '{{%grades}}', 'subject_id', '{{%subjects}}', 'id');
+        //foreign user to students
+        $this->addForeignKey('fk_students_user', '{{%students}}', 'user_id', '{{%user}}', 'id');
     }
 
     /**
@@ -23,9 +34,6 @@ class m231024_071617_grades extends Migration
      */
     public function safeDown()
     {
-        echo "m231024_071617_grades cannot be reverted.\n";
-
-        return false;
     }
 
     /*
