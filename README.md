@@ -17,12 +17,12 @@ This Website Includes Of : CRUD students, CRUD grades, CRUD subjects, and so on.
 1. Download the project
 2. Put The project on xampp\htdocs
 3. run the xampp (obviously)
-4. Create New Database Called nilai_siswa / Change the dbname on `common\config\main-local.php` at line 7
+4. Create New Database Called `yii2advanced` / Change the dbname on `common\config\main-local.php` at line 7
 5. open command line in project root
 6. run `php init`
 7. choose [0]development
 8. migrate the database by running this command ```bash php yii migrate``` then choose yes
-9. to serve the app run this command ```bash php yii serve --docroot="@frontend/web"
+9. to serve the app run this command `php yii serve --docroot="@frontend/web"
 10. by default, the server will be running on [localhost:8080](https://localhost:8080)
 11. (optional) you can serve the app into backend by changing the docroot into @backend/web, but it's empty for now so it's unnecessary :v
 12. 🇮🇩 🇮🇩 Happy Coding :) 🇮🇩 🇮🇩
